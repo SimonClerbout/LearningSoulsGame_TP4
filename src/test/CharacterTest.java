@@ -166,4 +166,177 @@ public class CharacterTest {
         }
     }
 
+    @Test
+    public void existBlackWitchVeilClass() {
+        try {
+            Class.forName("lsg.armor.BlackWitchVeil");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called BlackWitchVeil in package lsg.armor");
+        }
+    }
+
+    @Test
+    public void testBlackWitchVeilConstructor() {
+        Class<?> c = null;
+        try {
+            c = Class.forName("lsg.armor.BlackWitchVeil");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+
+            Assert.assertEquals(constructor.getModifiers(), Modifier.PUBLIC);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.armor.BlackWitchVeil");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a default constructor for lsg.armor.BlackWitchVeil class");
+        }
+    }
+
+    @Test
+    public void testBlackWitchVeilToString() {
+        Class<?> c = null;
+        try {
+            c = Class.forName("lsg.armor.BlackWitchVeil");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+            Object o = constructor.newInstance();
+            Method ts = c.getMethod("toString");
+
+            Assert.assertEquals(ts.getModifiers(), Modifier.PUBLIC);
+            Assert.assertEquals("Black Witch Veil(4.6)", (String) (ts.invoke(o)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.armor.BlackWitchVeil");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in ArmorItem class");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void existDragonSlayerLeggingsClass() {
+        try {
+            Class.forName("lsg.armor.DragonSlayerLeggings");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called DragonSlayerLeggings in package lsg.armor");
+        }
+    }
+
+    @Test
+    public void testDragonSlayerLeggingsConstructor() {
+        Class<?> c = null;
+        try {
+            c = Class.forName("lsg.armor.DragonSlayerLeggings");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+
+            Assert.assertEquals(constructor.getModifiers(), Modifier.PUBLIC);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.armor.DragonSlayerLeggings");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a default constructor for lsg.armor.DragonSlayerLeggings class");
+        }
+    }
+
+    @Test
+    public void testDragonSlayerLeggingsToString() {
+        Class<?> c = null;
+        try {
+            c = Class.forName("lsg.armor.DragonSlayerLeggings");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+            Object o = constructor.newInstance();
+            Method ts = c.getMethod("toString");
+
+            Assert.assertEquals(ts.getModifiers(), Modifier.PUBLIC);
+            Assert.assertEquals("Dragon Slayer Leggings(10.2)", (String) (ts.invoke(o)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.armor.DragonSlayerLeggings");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in ArmorItem class");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void existRingedKnightArmorClass() {
+        try {
+            Class.forName("lsg.armor.RingedKnightArmor");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called RingedKnightArmor in package lsg.armor");
+        }
+    }
+
+    @Test
+    public void testRingedKnightArmorConstructor() {
+        Class<?> c = null;
+        try {
+            c = Class.forName("lsg.armor.RingedKnightArmor");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+
+            Assert.assertEquals(constructor.getModifiers(), Modifier.PUBLIC);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.armor.RingedKnightArmor");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a default constructor for lsg.armor.RingedKnightArmor class");
+        }
+    }
+
+    @Test
+    public void testRingedKnightArmorToString() {
+        Class<?> c = null;
+        try {
+            c = Class.forName("lsg.armor.RingedKnightArmor");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+            Object o = constructor.newInstance();
+            Method ts = c.getMethod("toString");
+
+            Assert.assertEquals(ts.getModifiers(), Modifier.PUBLIC);
+            Assert.assertEquals("Ringed Knight Armor(14.99)", (String) (ts.invoke(o)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.armor.RingedKnightArmor");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in ArmorItem class");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void notExistToStringInArmorItemSubclasses() {
+        Class<?> c1 = null;
+        Class<?> c2 = null;
+        Class<?> c3 = null;
+        Method ts;
+
+        try {
+            c1 = Class.forName("lsg.armor.BlackWitchVeil");
+            c2 = Class.forName("lsg.armor.DragonSlayerLeggings");
+            c3 = Class.forName("lsg.armor.RingedKnightArmor");
+            c1.getDeclaredMethod("toString");
+            Assert.fail("toString method should be not override");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called BlackWitchVeil, DragonSlayerLeggings, RingedKnightArmor");
+        } catch (NoSuchMethodException e1) {
+            try {
+                c2.getDeclaredMethod("toString");
+                Assert.fail("toString method should be not override");
+            } catch (NoSuchMethodException e2) {
+                try {
+                    c3.getDeclaredMethod("toString");
+                    Assert.fail("toString method should be not override");
+                } catch (NoSuchMethodException e3) {
+                    Assert.assertTrue(true);
+                }
+            }
+        }
+    }
 }
