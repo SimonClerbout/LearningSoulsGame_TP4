@@ -37,7 +37,7 @@ public class CharacterTest {
     }
 
     @Test
-    public void testAttributes() {
+    public void testSkinThicknessAttributes() {
         try {
             Class<?> c = Class.forName("lsg.characters.Monster");
             Field f = c.getDeclaredField("skinThickness");
@@ -82,5 +82,88 @@ public class CharacterTest {
         }
     }
 
+    @Test
+    public void existArmorItemClass() {
+        try {
+            Class.forName("lsg.armor.ArmorItem");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called ArmorItem in package lsg.armor");
+        }
+    }
+
+    @Test
+    public void testArmorItemAttributes() {
+        try {
+            Class<?> c = Class.forName("lsg.armor.ArmorItem");
+            Field f1 = c.getDeclaredField("name");
+            Field f2 = c.getDeclaredField("armorValue");
+
+            Assert.assertEquals(f1.getModifiers(), Modifier.PRIVATE);
+            Assert.assertEquals(f2.getModifiers(), Modifier.PRIVATE);
+            Assert.assertEquals(f1.getType(), String.class);
+            Assert.assertEquals(f2.getType(), float.class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called ArmorItem");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("should have some missed attribute: name and armorValue");
+        }
+    }
+
+    @Test
+    public void testArmorItemGetterSetter() {
+        try {
+            Class<?> c = Class.forName("lsg.armor.ArmorItem");
+            Method m1 = c.getDeclaredMethod("getName");
+            Method m2 = c.getDeclaredMethod("getArmorValue");
+
+            Assert.assertEquals(m1.getModifiers(), Modifier.PUBLIC);
+            Assert.assertEquals(m2.getModifiers(), Modifier.PUBLIC);
+            Assert.assertTrue("wrong return type (string) of getName", m1.getReturnType() == String.class);
+            Assert.assertTrue("wrong return type (float) of getArmorValue", m2.getReturnType() == float.class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called ArmorItem");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have accessors for name and armorValue attributes");
+        }
+    }
+
+    @Test
+    public void testArmorItemConstructor() {
+        Class<?> c = null;
+        try {
+            c = Class.forName("lsg.armor.ArmorItem");
+            Constructor<?> constructor = c.getDeclaredConstructor(java.lang.String.class, float.class);
+
+            Assert.assertEquals(constructor.getModifiers(), Modifier.PUBLIC);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.armor.ArmorItem");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a constructor with two parameters (String and float) for lsg.armor.ArmorItem class");
+        }
+    }
+
+    @Test
+    public void existArmorItemToString() {
+        Class<?> c = null;
+        try {
+            c = Class.forName("lsg.armor.ArmorItem");
+            Constructor<?> constructor = c.getDeclaredConstructor(java.lang.String.class, float.class);
+            Object o = constructor.newInstance("Black Witch Veil", 4.6f);
+            Method ts = c.getDeclaredMethod("toString");
+
+            Assert.assertEquals(ts.getModifiers(), Modifier.PUBLIC);
+            Assert.assertEquals("Black Witch Veil(4.6)", (String) (ts.invoke(o)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.armor.ArmorItem");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in ArmorItem class");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
