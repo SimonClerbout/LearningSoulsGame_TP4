@@ -614,4 +614,21 @@ public class CharacterTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void existComputeProtectionInCharacterClass() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Character");
+            Method m = c.getDeclaredMethod("computeProtection");
+
+            Assert.assertEquals(c.getModifiers(), Modifier.PUBLIC | Modifier.ABSTRACT);
+            Assert.assertEquals(m.getModifiers(), Modifier.PROTECTED | Modifier.ABSTRACT);
+            Assert.assertTrue("wrong return type (float) of computeProtection", m.getReturnType() == float.class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.characters.Character");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called computeProtection in Character class");
+        }
+
+    }
 }
