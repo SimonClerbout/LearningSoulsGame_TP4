@@ -591,4 +591,27 @@ public class CharacterTest {
         }
     }
 
+    @Test
+    public void testMain() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Hero");
+            Method m = c.getMethod("main", String[].class);
+            Object[] args = new Object[1];
+
+            args[0] = new String[]{};
+            m.invoke(null, args);
+
+            String[] list = outContent.toString().split("\n");
+
+            Assert.assertEquals("ARMOR   1:Black Witch Veil(4.6)           2:empty                           3:Ringed Knight Armor(14.99)    TOTAL:19.59", list[0]);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
