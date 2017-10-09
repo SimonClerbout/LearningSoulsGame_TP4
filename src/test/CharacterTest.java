@@ -65,4 +65,22 @@ public class CharacterTest {
         }
     }
 
+    @Test
+    public void testSkinThicknessGetterSetter() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Monster");
+            Method mg = c.getDeclaredMethod("getSkinThickness");
+            Method ms = c.getDeclaredMethod("setSkinThickness", float.class);
+
+            Assert.assertEquals(mg.getModifiers(), Modifier.PUBLIC);
+            Assert.assertEquals(ms.getModifiers(), Modifier.PRIVATE);
+            Assert.assertTrue("wrong return type (float) of getSkinThickness", mg.getReturnType() == float.class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Monster");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have accessors for skinThickness attribute");
+        }
+    }
+
+
 }
