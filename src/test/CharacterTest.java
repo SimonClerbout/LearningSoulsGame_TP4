@@ -656,4 +656,29 @@ public class CharacterTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void existComputeProtectionInHeroClass() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Hero");
+            Constructor<?> constructor1 = c.getDeclaredConstructor(java.lang.String.class);
+            Object o = constructor1.newInstance("supertoto");
+            Method m1 = c.getDeclaredMethod("computeProtection");
+            Method m2 = c.getDeclaredMethod("getTotalArmor");
+
+            Assert.assertEquals(m1.getModifiers(), Modifier.PROTECTED);
+            Assert.assertTrue("wrong return type (float) of computeProtection", m1.getReturnType() == float.class);
+            Assert.assertEquals((float) (m1.invoke(o)), (float) (m2.invoke(o)), 0.01f);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.characters.Hero");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called computeProtection in Hero class");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
 }
