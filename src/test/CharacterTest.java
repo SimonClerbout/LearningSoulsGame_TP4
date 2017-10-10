@@ -2,6 +2,7 @@ package test;
 
 import com.sun.istack.internal.Nullable;
 import lsg.armor.ArmorItem;
+import lsg.weapons.Weapon;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -74,7 +75,7 @@ public class CharacterTest {
             Method ms = c.getDeclaredMethod("setSkinThickness", float.class);
 
             Assert.assertEquals(mg.getModifiers(), Modifier.PUBLIC);
-            Assert.assertEquals(ms.getModifiers(), Modifier.PRIVATE);
+            Assert.assertEquals(ms.getModifiers(), Modifier.PROTECTED);
             Assert.assertTrue("wrong return type (float) of getSkinThickness", mg.getReturnType() == float.class);
         } catch (ClassNotFoundException e) {
             Assert.fail("should have a class called Monster");
@@ -760,4 +761,52 @@ public class CharacterTest {
             Assert.fail("InvocationTargetException");
         }
     }
+
+    @Test
+    public void existLycanthropeClass() {
+        try {
+            Class.forName("lsg.characters.Lycanthrope");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Lycanthrope in package lsg.characters");
+        }
+    }
+
+    @Test
+    public void existLycanthropeInheritance() {
+        try {
+            Class<?> c1 = Class.forName("lsg.characters.Monster");
+            Class<?> c2 = Class.forName("lsg.characters.Lycanthrope");
+
+            Assert.assertTrue("Lycanthrope should be a subclass of Monster", c1.isAssignableFrom(c2));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called Monster and Lycanthrope in package lsg.charaters");
+        }
+    }
+
+    @Test
+    public void testLycanthropeDefaultValues() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Lycanthrope");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+            Object o = constructor.newInstance();
+            Method m1 = c.getMethod("getSkinThickness");
+            Method m2 = c.getMethod("getWeapon");
+            Method m3 = c.getMethod("getName");
+
+            Assert.assertEquals((float)(m1.invoke(o)), 30.f, 0.01f);
+            Assert.assertEquals(((Weapon)(m2.invoke(o))).getClass(), lsg.weapons.Claw.class);
+            Assert.assertEquals((String)(m3.invoke(o)), "Lycanthrope");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Lycanthrope in package lsg.charaters");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have methods called getWeapon and getSkinThickness in Lycanthrope class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
 }
