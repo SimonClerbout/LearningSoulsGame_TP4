@@ -58,11 +58,11 @@ public class CharacterTest {
         } catch (NoSuchFieldException e) {
             Assert.fail("should have an attribute named skinThickness");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         }
     }
 
@@ -159,11 +159,11 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called toString in ArmorItem class");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         }
     }
 
@@ -255,11 +255,11 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called toString in ArmorItem class");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         }
     }
 
@@ -303,11 +303,11 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called toString in ArmorItem class");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         }
     }
 
@@ -368,6 +368,8 @@ public class CharacterTest {
                 Field f = c.getDeclaredField("MAX_ARMOR_PIECES");
                 Object o = constructor.newInstance("supertoto");
 
+                f.setAccessible(true);
+
                 Assert.assertEquals(f.getModifiers(), Modifier.PRIVATE | Modifier.STATIC);
                 Assert.assertEquals(f.getType(), int.class);
                 Assert.assertEquals((int) (f.get(o)), 3);
@@ -376,14 +378,14 @@ public class CharacterTest {
             Assert.fail("should have a class called Hero");
         } catch (NoSuchFieldException e) {
             Assert.fail("should have an static attribute named MAX_ARMOR_PIECES");
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("NoSuchMethodException");
         }
     }
 
@@ -398,6 +400,9 @@ public class CharacterTest {
             } else {
                 Object o = constructor.newInstance("supertoto");
                 Field f = c.getDeclaredField("armor");
+
+                f.setAccessible(true);
+
                 lsg.armor.ArmorItem[] armor = (lsg.armor.ArmorItem[]) (f.get(o));
 
                 Assert.assertEquals(armor.length, 3);
@@ -408,15 +413,15 @@ public class CharacterTest {
         } catch (ClassNotFoundException e) {
             Assert.fail("should have a class called Hero");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("NoSuchFieldException");
         } catch (NoSuchMethodException e) {
             Assert.fail("should have methods called getName, getLife and getStamina");
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            Assert.fail("should have an attribute named armor");
         }
     }
 
@@ -438,6 +443,9 @@ public class CharacterTest {
                 m1.invoke(o1, o2, 4);
 
                 Field f = c1.getDeclaredField("armor");
+
+                f.setAccessible(true);
+
                 lsg.armor.ArmorItem[] armor = (lsg.armor.ArmorItem[]) (f.get(o1));
 
                 Assert.assertEquals(armor.length, 3);
@@ -461,6 +469,9 @@ public class CharacterTest {
                 m1.invoke(o1, o2, 1);
 
                 Field f = c1.getDeclaredField("armor");
+
+                f.setAccessible(true);
+
                 lsg.armor.ArmorItem[] armor = (lsg.armor.ArmorItem[]) (f.get(o1));
 
                 Assert.assertEquals(armor.length, 3);
@@ -473,13 +484,13 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called setArmorItem in Hero class");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            Assert.fail("NoSuchFieldException");
         }
     }
 
@@ -509,11 +520,11 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called getTotalArmor in Hero class");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         }
     }
 
@@ -543,11 +554,11 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called armorToString in Hero class");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         }
     }
 
@@ -583,11 +594,11 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called getArmorItems in Hero class");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         }
     }
 
@@ -606,13 +617,13 @@ public class CharacterTest {
             Assert.assertEquals("ARMOR   1:Black Witch Veil(4.6)           2:empty" +
                     "                           3:Ringed Knight Armor(14.99)    TOTAL:19.59", list[0]);
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            Assert.fail("NoSuchMethodException");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            Assert.fail("ClassNotFoundException");
         }
     }
 
@@ -641,6 +652,8 @@ public class CharacterTest {
             Method m1 = c.getDeclaredMethod("computeProtection");
             Method m2 = c.getDeclaredMethod("getSkinThickness");
 
+            m1.setAccessible(true);
+
             Assert.assertEquals(m1.getModifiers(), Modifier.PROTECTED);
             Assert.assertTrue("wrong return type (float) of computeProtection", m1.getReturnType() == float.class);
             Assert.assertEquals((float) (m1.invoke(o)), (float) (m2.invoke(o)), 0.01f);
@@ -649,11 +662,11 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called computeProtection in Monster class");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         }
     }
 
@@ -666,6 +679,8 @@ public class CharacterTest {
             Method m1 = c.getDeclaredMethod("computeProtection");
             Method m2 = c.getDeclaredMethod("getTotalArmor");
 
+            m1.setAccessible(true);
+
             Assert.assertEquals(m1.getModifiers(), Modifier.PROTECTED);
             Assert.assertTrue("wrong return type (float) of computeProtection", m1.getReturnType() == float.class);
             Assert.assertEquals((float) (m1.invoke(o)), (float) (m2.invoke(o)), 0.01f);
@@ -674,11 +689,42 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called computeProtection in Hero class");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
         }
     }
+
+    @Test
+    public void testHeroToString() {
+        try {
+            Class<?> c1 = Class.forName("lsg.characters.Hero");
+            Constructor<?> constructor1 = c1.getDeclaredConstructor();
+            Object o1 = constructor1.newInstance();
+            Method m1 = c1.getDeclaredMethod("setArmorItem", ArmorItem.class, int.class);
+            Method ts = c1.getMethod("toString");
+
+            Class<?> c2 = Class.forName("lsg.armor.RingedKnightArmor");
+            Constructor<?> constructor2 = c2.getDeclaredConstructor();
+            Object o2 = constructor2.newInstance();
+
+            m1.setAccessible(true);
+
+            m1.invoke(o1, o2, 1);
+            Assert.assertEquals((String) (ts.invoke(o1)), "[ Hero ]             Gregooninator        LIFE:  100      STAMINA:   50      PROTECTION:14.99     (ALIVE)");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called lsg.characters.Hero and lsg.armor.RingedKnightArmor");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called setArmorItem in Hero class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
 }
