@@ -603,7 +603,8 @@ public class CharacterTest {
 
             String[] list = outContent.toString().split("\n");
 
-            Assert.assertEquals("ARMOR   1:Black Witch Veil(4.6)           2:empty                           3:Ringed Knight Armor(14.99)    TOTAL:19.59", list[0]);
+            Assert.assertEquals("ARMOR   1:Black Witch Veil(4.6)           2:empty" +
+                    "                           3:Ringed Knight Armor(14.99)    TOTAL:19.59", list[0]);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -629,6 +630,30 @@ public class CharacterTest {
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called computeProtection in Character class");
         }
+    }
 
+    @Test
+    public void existComputeProtectionInMonsterClass() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Monster");
+            Constructor<?> constructor1 = c.getDeclaredConstructor(java.lang.String.class);
+            Object o = constructor1.newInstance("supertoto");
+            Method m1 = c.getDeclaredMethod("computeProtection");
+            Method m2 = c.getDeclaredMethod("getSkinThickness");
+
+            Assert.assertEquals(m1.getModifiers(), Modifier.PROTECTED);
+            Assert.assertTrue("wrong return type (float) of computeProtection", m1.getReturnType() == float.class);
+            Assert.assertEquals((float) (m1.invoke(o)), (float) (m2.invoke(o)), 0.01f);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.characters.Monster");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called computeProtection in Monster class");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }
