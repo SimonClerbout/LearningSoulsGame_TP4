@@ -727,4 +727,37 @@ public class CharacterTest {
         }
     }
 
+    @Test
+    public void testGetHitWith() {
+        try {
+            Class<?> c1 = Class.forName("lsg.characters.Hero");
+            Constructor<?> constructor1 = c1.getDeclaredConstructor();
+            Object o1 = constructor1.newInstance();
+            Method m1 = c1.getDeclaredMethod("setArmorItem", ArmorItem.class, int.class);
+            Method m2 = c1.getMethod("getHitWith", int.class);
+
+            Class<?> c2 = Class.forName("lsg.armor.RingedKnightArmor");
+            Constructor<?> constructor2 = c2.getDeclaredConstructor();
+            Object o2 = constructor2.newInstance();
+            Class<?> c3 = Class.forName("lsg.armor.DragonSlayerLeggings");
+            Constructor<?> constructor3 = c3.getDeclaredConstructor();
+            Object o3 = constructor3.newInstance();
+
+            m1.setAccessible(true);
+
+            m1.invoke(o1, o2, 1);
+            m1.invoke(o1, o3, 2);
+            Assert.assertEquals((int) (m2.invoke(o1, 10)), 7);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called lsg.characters.Hero, lsg.armor.RingedKnightArmor and lsg.armor.DragonSlayerLeggings");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have methods called setArmorItem and getHitWith in Hero class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
 }
