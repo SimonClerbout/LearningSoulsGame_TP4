@@ -422,7 +422,7 @@ public class CharacterTest {
         } catch (NoSuchFieldException e) {
             Assert.fail("NoSuchFieldException");
         } catch (NoSuchMethodException e) {
-            Assert.fail("should have methods called getName, getLife and getStamina");
+            Assert.fail("NoSuchMethodException");
         }
     }
 
@@ -706,6 +706,7 @@ public class CharacterTest {
             Object o1 = constructor1.newInstance();
             Method m1 = c1.getDeclaredMethod("setArmorItem", ArmorItem.class, int.class);
             Method ts = c1.getMethod("toString");
+            Method m2 = c1.getMethod("getRings");
 
             Class<?> c2 = Class.forName("lsg.armor.RingedKnightArmor");
             Constructor<?> constructor2 = c2.getDeclaredConstructor();
@@ -714,7 +715,11 @@ public class CharacterTest {
             m1.setAccessible(true);
 
             m1.invoke(o1, o2, 1);
-            Assert.assertEquals((String) (ts.invoke(o1)), "[ Hero ]             Gregooninator        LIFE:  100      STAMINA:   50      PROTECTION:14.99     (ALIVE)");
+            if (m2 == null) {
+                Assert.assertEquals((String) (ts.invoke(o1)), "[ Hero ]             Gregooninator        LIFE:  100      STAMINA:   50      PROTECTION: 14.99    (ALIVE)");
+            } else {
+                Assert.assertEquals((String) (ts.invoke(o1)), "[ Hero ]             Gregooninator        LIFE:  100      STAMINA:   50      PROTECTION: 14.99     BUFF:  0.00    (ALIVE)");
+            }
         } catch (ClassNotFoundException e) {
             Assert.fail("should have classes called lsg.characters.Hero and lsg.armor.RingedKnightArmor");
         } catch (NoSuchMethodException e) {
@@ -806,6 +811,272 @@ public class CharacterTest {
             Assert.fail("InstantiationException");
         } catch (InvocationTargetException e) {
             Assert.fail("InvocationTargetException");
+        }
+    }
+
+    @Test
+    public void testRingsAttribute() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Hero");
+            Field f = c.getDeclaredField("rings");
+
+            Assert.assertEquals(f.getModifiers(), Modifier.PRIVATE);
+            Assert.assertEquals(f.getType(), lsg.buffs.rings.Ring[].class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Hero");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("should have an attribute named rings");
+        }
+    }
+
+    @Test
+    public void testMaxRingsAttribute() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Hero");
+            Constructor<?> constructor = c.getDeclaredConstructor(java.lang.String.class);
+
+            if (c == null) {
+                Assert.fail("should have a constructor with a string parameter");
+            } else {
+                Field f = c.getDeclaredField("MAX_RINGS");
+                Object o = constructor.newInstance("supertoto");
+
+                f.setAccessible(true);
+
+                Assert.assertEquals(f.getModifiers(), Modifier.PRIVATE | Modifier.STATIC);
+                Assert.assertEquals(f.getType(), int.class);
+                Assert.assertEquals((int) (f.get(o)), 2);
+            }
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Hero");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("should have an static attribute named MAX_RINGS");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("NoSuchMethodException");
+        }
+    }
+
+    @Test
+    public void testHeroConstructorWithRings() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Hero");
+            Constructor<?> constructor = c.getDeclaredConstructor(java.lang.String.class);
+
+            if (constructor == null) {
+                Assert.fail("should have a constructor with a string parameter");
+            } else {
+                Object o = constructor.newInstance("supertoto");
+                Field f = c.getDeclaredField("rings");
+
+                f.setAccessible(true);
+
+                lsg.buffs.rings.Ring[] rings = (lsg.buffs.rings.Ring[]) (f.get(o));
+
+                Assert.assertEquals(rings.length, 2);
+                Assert.assertEquals(rings[0], null);
+                Assert.assertEquals(rings[1], null);
+            }
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Hero");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("NoSuchFieldException");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("NoSuchMethodException");
+        }
+    }
+
+    @Test
+    public void testSetRings() {
+        try {
+            Class<?> c1 = Class.forName("lsg.characters.Hero");
+            Constructor<?> constructor1 = c1.getDeclaredConstructor(java.lang.String.class);
+            Object o1 = constructor1.newInstance("supertoto");
+            Method m1 = c1.getMethod("setRing", lsg.buffs.rings.Ring.class, int.class);
+
+            Assert.assertEquals(m1.getModifiers(), Modifier.PUBLIC);
+
+            {
+                Class<?> c2 = Class.forName("lsg.buffs.rings.RingOfDeath");
+                Constructor<?> constructor2 = c2.getDeclaredConstructor();
+                Object o2 = constructor2.newInstance();
+
+                m1.invoke(o1, o2, 3);
+
+                Field f = c1.getDeclaredField("rings");
+
+                f.setAccessible(true);
+
+                lsg.buffs.rings.Ring[] rings = (lsg.buffs.rings.Ring[]) (f.get(o1));
+
+                Assert.assertEquals(rings.length, 2);
+                Assert.assertEquals(rings[0], null);
+                Assert.assertEquals(rings[1], null);
+
+                m1.invoke(o1, o2, 0);
+
+                rings = (lsg.buffs.rings.Ring[]) (f.get(o1));
+                Assert.assertEquals(rings.length, 2);
+                Assert.assertEquals(rings[0], null);
+                Assert.assertEquals(rings[1], null);
+            }
+            {
+                Class<?> c2 = Class.forName("lsg.buffs.rings.RingOfDeath");
+                Constructor<?> constructor2 = c2.getDeclaredConstructor();
+                Object o2 = constructor2.newInstance();
+
+                m1.invoke(o1, o2, 1);
+
+                Field f = c1.getDeclaredField("rings");
+
+                f.setAccessible(true);
+
+                lsg.buffs.rings.Ring[] rings = (lsg.buffs.rings.Ring[]) (f.get(o1));
+
+                Assert.assertEquals(rings.length, 2);
+                Assert.assertEquals(rings[0], o2);
+                Assert.assertEquals(rings[1], null);
+            }
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.characters.Hero");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called setRing in Hero class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("NoSuchFieldException");
+        }
+    }
+
+    @Test
+    public void testTalismanAttribute() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Monster");
+            Field f = c.getDeclaredField("talisman");
+
+            Assert.assertEquals(f.getModifiers(), Modifier.PRIVATE);
+            Assert.assertEquals(f.getType(), lsg.buffs.talismans.Talisman.class);
+
+            Constructor<?> constructor = searchDefaultConstructor(c);
+            Object o = constructor.newInstance();
+
+            f.setAccessible(true);
+
+            Assert.assertEquals(f.get(o), null);
+
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Monster");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("should have an attribute named talisman");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
+    @Test
+    public void testTalismanGetterSetter() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Monster");
+            Method mg = c.getDeclaredMethod("getTalisman");
+            Method ms = c.getDeclaredMethod("setTalisman", lsg.buffs.talismans.Talisman.class);
+
+            Assert.assertEquals(mg.getModifiers(), Modifier.PUBLIC);
+            Assert.assertEquals(ms.getModifiers(), Modifier.PUBLIC);
+            Assert.assertTrue("wrong return type (float) of getTalisman", mg.getReturnType() == lsg.buffs.talismans.Talisman.class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Monster");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have accessors for talisman attribute");
+        }
+    }
+
+    @Test
+    public void existComputeBuffInCharacterClass() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Character");
+            Method m = c.getDeclaredMethod("computeBuff");
+
+            Assert.assertEquals(c.getModifiers(), Modifier.PUBLIC | Modifier.ABSTRACT);
+            Assert.assertEquals(m.getModifiers(), Modifier.PROTECTED | Modifier.ABSTRACT);
+            Assert.assertTrue("wrong return type (float) of computePBuff", m.getReturnType() == float.class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.characters.Character");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called computeBuff in Character class");
+        }
+    }
+
+    @Test
+    public void existComputeBuffInMonsterClass() {
+        try {
+            Class<?> c1 = Class.forName("lsg.characters.Monster");
+            Constructor<?> constructor1 = c1.getDeclaredConstructor(java.lang.String.class);
+            Object o1 = constructor1.newInstance("supertoto");
+
+            Class<?> c2 = Class.forName("lsg.buffs.talismans.NoonGift");
+            Constructor<?> constructor2 = c2.getDeclaredConstructor();
+            Object o2 = constructor2.newInstance();
+
+            Method m1 = c1.getDeclaredMethod("computeBuff");
+            Method m2 = c1.getDeclaredMethod("getTalisman");
+            Method m3 = c1.getDeclaredMethod("setTalisman", lsg.buffs.talismans.Talisman.class);
+            Method m4 = c2.getMethod("computeBuffValue");
+
+            m1.setAccessible(true);
+            m3.setAccessible(true);
+            m4.setAccessible(true);
+
+            m3.invoke(o1, o2);
+            Assert.assertEquals(m1.getModifiers(), Modifier.PROTECTED);
+            Assert.assertTrue("wrong return type (float) of computeBuff", m1.getReturnType() == float.class);
+            Assert.assertEquals((float) (m1.invoke(o1)), (float)(m4.invoke((lsg.buffs.talismans.Talisman) (m2.invoke(o1)))), 0.01f);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.characters.Monster");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called computeBuff in Monster class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
+    @Test
+    public void existComputeBuffInHeroClass() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Hero");
+            Constructor<?> constructor1 = c.getDeclaredConstructor(java.lang.String.class);
+            Method m1 = c.getDeclaredMethod("computeBuff");
+
+            m1.setAccessible(true);
+
+            Assert.assertEquals(m1.getModifiers(), Modifier.PROTECTED);
+            Assert.assertTrue("wrong return type (float) of computeBuff", m1.getReturnType() == float.class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called lsg.characters.Hero");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called computeBuff in Hero class");
         }
     }
 
