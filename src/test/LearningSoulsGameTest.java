@@ -30,25 +30,30 @@ public class LearningSoulsGameTest {
     }
 
     @Test
-    public void testMain() {
+    public void testCreateExhaustedHero() {
         try {
             Class<?> c = Class.forName("lsg.LearningSoulsGame");
-            Method m = c.getMethod("main", String[].class);
-            Object[] args = new Object[1];
+            Constructor<?> constructor = c.getDeclaredConstructor();
 
-            args[0] = new String[]{};
-            m.invoke(null, args);
+            constructor.setAccessible(true);
 
-            String[] list = outContent.toString().split("\n");
+            Object o = constructor.newInstance();
+            Method m = c.getDeclaredMethod("createExhaustedHero");
 
+            m.setAccessible(true);
+            m.invoke(o);
+
+            Assert.assertEquals(outContent.toString(), "[ Hero ]             Gregooninator        LIFE:    1      STAMINA:    0      PROTECTION:  0.00     BUFF:  0.00    (ALIVE)\n");
         } catch (ClassNotFoundException e) {
             Assert.fail("should have a class called LearningSoulsGame");
         } catch (NoSuchMethodException e) {
-            Assert.fail("should have a static method called main");
+            Assert.fail("should have a method called createExhaustedHero");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Assert.fail("IllegalAccessException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            Assert.fail("InvocationTargetException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
         }
     }
 }
