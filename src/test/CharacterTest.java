@@ -104,4 +104,24 @@ public class CharacterTest {
         }
     }
 
+    @Test
+    public void testNewStaticAttributes() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Character");
+            Field f1 = c.getDeclaredField("PROTECTION_STAT_STRING");
+            Field f2 = c.getDeclaredField("BUFF_STAT_STRING");
+
+            Assert.assertEquals(f1.getModifiers(), Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL);
+            Assert.assertEquals(f1.getType(), String.class);
+
+            Assert.assertEquals(f2.getModifiers(), Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL);
+            Assert.assertEquals(f2.getType(), String.class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Character");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("should have an attribute named PROTECTION_STAT_STRING or BUFF_STAT_STRING");
+        }
+    }
+
+
 }
