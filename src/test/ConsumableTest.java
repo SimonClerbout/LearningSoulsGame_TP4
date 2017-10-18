@@ -1,6 +1,7 @@
 package test;
 
 import lsg.armor.ArmorItem;
+import lsg.consumables.Consumable;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -252,5 +253,78 @@ public class ConsumableTest {
         }
     }
 
+    @Test
+    public void existMenuBestOfV1Class() {
+        try {
+            Class<?> c = Class.forName("lsg.consumables.MenuBestOfV1");
+            Field f = c.getDeclaredField("menu");
+
+            Assert.assertEquals(f.getModifiers(), Modifier.PRIVATE);
+            Assert.assertEquals(f.getType(), Consumable[].class);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a MenuBestOfV1 class");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("should have attribute named menu");
+        }
+    }
+
+    @Test
+    public void testMenuBestOfV1ToString() {
+        try {
+            Class<?> c = Class.forName("lsg.consumables.MenuBestOfV1");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+            Object o = constructor.newInstance();
+            Method m = c.getDeclaredMethod("toString");
+            String str = (String) (m.invoke(o));
+            String[] list = str.toString().split("\n");
+
+            Assert.assertEquals("MenuBestOfV1 :", list[0]);
+            Assert.assertEquals("1 : Uncle Greg's spicy Maroilles burger [40 life point(s)]", list[1]);
+            Assert.assertEquals("2 : Pomerol 2008 [30 stamina point(s)]", list[2]);
+            Assert.assertEquals("3 : Friterie 2000's Best of the Best [3000 life point(s)]", list[3]);
+            Assert.assertEquals("4 : Hot Grandmother Coffee [10 stamina point(s)]", list[4]);
+            Assert.assertEquals("5 : 12 years old Oban [150 stamina point(s)]", list[5]);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called MenuBestOfV1 in consumables package");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in MenuBestOfV1 class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
+    @Test
+    public void testMenuBestOfV1Main() {
+        try {
+            Class<?> c = Class.forName("lsg.consumables.MenuBestOfV1");
+
+            Method m = c.getMethod("main", String[].class);
+            Object[] args = new Object[1];
+
+            args[0] = new String[]{};
+            m.invoke(null, args);
+
+            String[] list = outContent.toString().split("\n");
+
+            Assert.assertEquals("MenuBestOfV1 :", list[0]);
+            Assert.assertEquals("1 : Uncle Greg's spicy Maroilles burger [40 life point(s)]", list[1]);
+            Assert.assertEquals("2 : Pomerol 2008 [30 stamina point(s)]", list[2]);
+            Assert.assertEquals("3 : Friterie 2000's Best of the Best [3000 life point(s)]", list[3]);
+            Assert.assertEquals("4 : Hot Grandmother Coffee [10 stamina point(s)]", list[4]);
+            Assert.assertEquals("5 : 12 years old Oban [150 stamina point(s)]", list[5]);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called MenuBestOfV1 in consumables package");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in MenuBestOfV1 class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
 
 }
