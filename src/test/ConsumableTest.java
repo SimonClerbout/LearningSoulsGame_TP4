@@ -408,4 +408,82 @@ public class ConsumableTest {
             Assert.fail("InvocationTargetException");
         }
     }
+
+    @Test
+    public void existMenuBestOfV3Class() {
+        try {
+            Class<?> c = Class.forName("lsg.consumables.MenuBestOfV3");
+
+            Assert.assertTrue("Food should be a subclass of Consumable", java.util.HashSet.class.isAssignableFrom(c));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a MenuBestOfV3 class");
+        }
+    }
+
+    @Test
+    public void testMenuBestOfV3ToString() {
+        try {
+            Class<?> c = Class.forName("lsg.consumables.MenuBestOfV3");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+            Object o = constructor.newInstance();
+            Method m = c.getDeclaredMethod("toString");
+            String str = (String) (m.invoke(o));
+            String[] list = str.toString().split("\n");
+
+            Assert.assertEquals("MenuBestOfV3 :", list[0]);
+
+            String[] values = new String[]{"Uncle Greg's spicy Maroilles burger [40 life point(s)]", "Pomerol 2008 [30 stamina point(s)]", "Friterie 2000's Best of the Best [3000 life point(s)]",
+                    "Hot Grandmother Coffee [10 stamina point(s)]", "12 years old Oban [150 stamina point(s)]"};
+
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[1].substring(4)) != -1);
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[2].substring(4)) != -1);
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[3].substring(4)) != -1);
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[4].substring(4)) != -1);
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[5].substring(4)) != -1);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called MenuBestOfV3 in consumables package");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in MenuBestOfV3 class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
+    @Test
+    public void testMenuBestOfV3Main() {
+        try {
+            Class<?> c = Class.forName("lsg.consumables.MenuBestOfV3");
+
+            Method m = c.getMethod("main", String[].class);
+            Object[] args = new Object[1];
+
+            args[0] = new String[]{};
+            m.invoke(null, args);
+
+            String[] list = outContent.toString().split("\n");
+
+            Assert.assertEquals("MenuBestOfV3 :", list[0]);
+
+            String[] values = new String[]{"Uncle Greg's spicy Maroilles burger [40 life point(s)]", "Pomerol 2008 [30 stamina point(s)]", "Friterie 2000's Best of the Best [3000 life point(s)]",
+                    "Hot Grandmother Coffee [10 stamina point(s)]", "12 years old Oban [150 stamina point(s)]"};
+
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[1].substring(4)) != -1);
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[2].substring(4)) != -1);
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[3].substring(4)) != -1);
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[4].substring(4)) != -1);
+            Assert.assertTrue(java.util.Arrays.asList(values).indexOf(list[5].substring(4)) != -1);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called MenuBestOfV3 in consumables package");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in MenuBestOfV3 class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
 }
