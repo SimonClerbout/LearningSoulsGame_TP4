@@ -123,5 +123,33 @@ public class CharacterTest {
         }
     }
 
+    @Test
+    public void testCharacterDrink() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Hero");
+            Class<?> c2 = Class.forName("lsg.characters.Character");
+            Class<?> c3 = Class.forName("lsg.consumables.drinks.Drink");
+            Class<?> c4 = Class.forName("lsg.consumables.drinks.Whisky");
+            Constructor<?> constructor1 = c.getDeclaredConstructor();
+            Constructor<?> constructor2 = c4.getDeclaredConstructor();
+            Object o1 = constructor1.newInstance();
+            Object o2 = constructor2.newInstance();
+            Method m = c2.getDeclaredMethod("drink", c3);
+
+            m.setAccessible(true);
+            m.invoke(o1, o2);
+            Assert.assertEquals(outContent.toString(), "Gregooninator drinks 12 years old Oban [150 stamina point(s)]\n");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called lsg.characters.Hero");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called drink in Character class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
 
 }
