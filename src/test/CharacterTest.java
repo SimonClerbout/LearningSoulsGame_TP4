@@ -189,4 +189,38 @@ public class CharacterTest {
         }
     }
 
+    @Test
+    public void testCharacterUse() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Hero");
+            Class<?> c2 = Class.forName("lsg.characters.Character");
+            Class<?> c3 = Class.forName("lsg.consumables.Consumable");
+            Class<?> c4 = Class.forName("lsg.consumables.food.Hamburger");
+            Class<?> c5 = Class.forName("lsg.consumables.drinks.Whisky");
+
+            Constructor<?> constructor1 = c.getDeclaredConstructor();
+            Constructor<?> constructor2 = c4.getDeclaredConstructor();
+            Constructor<?> constructor3 = c5.getDeclaredConstructor();
+            Object o1 = constructor1.newInstance();
+            Object o2 = constructor2.newInstance();
+            Object o3 = constructor3.newInstance();
+            Method m = c2.getDeclaredMethod("use", c3);
+
+            Assert.assertEquals(m.getModifiers(), Modifier.PUBLIC);
+
+            m.invoke(o1, o2);
+            m.invoke(o1, o3);
+            Assert.assertEquals(outContent.toString(), "Gregooninator eats Uncle Greg's spicy Maroilles burger [40 life point(s)]\nGregooninator drinks 12 years old Oban [150 stamina point(s)]\n");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called lsg.characters.Hero, lsg.characters.Character, lsg.consumables.Consumable, lsg.consumables.food.Hamburger and lsg.consumables.drinks.Whisky");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called use in Character class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
 }
