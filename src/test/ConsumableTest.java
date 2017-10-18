@@ -155,7 +155,7 @@ public class ConsumableTest {
     }
 
     @Test
-    public void existSubClasses() {
+    public void existDrinkSubClasses() {
         try {
             Class<?> c1 = Class.forName("lsg.consumables.drinks.Coffee");
             Class<?> c2 = Class.forName("lsg.consumables.drinks.Drink");
@@ -205,5 +205,52 @@ public class ConsumableTest {
             Assert.fail("InvocationTargetException");
         }
     }
+
+    @Test
+    public void existFoodSubClasses() {
+        try {
+            Class<?> c1 = Class.forName("lsg.consumables.food.Americain");
+            Class<?> c2 = Class.forName("lsg.consumables.food.Food");
+            Class<?> c3 = Class.forName("lsg.consumables.food.Hamburger");
+            Class<?> c4 = Class.forName("lsg.consumables.Consumable");
+
+            Assert.assertTrue("Food should be a subclass of Consumable", c4.isAssignableFrom(c2));
+            Assert.assertTrue("American should be a subclass of Food", c2.isAssignableFrom(c1));
+            Assert.assertTrue("Hamburger should be a subclass of Food", c2.isAssignableFrom(c3));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have subclasses of Consumable");
+        }
+    }
+
+    @Test
+    public void testFoodToString() {
+        try {
+            Class<?> c0 = Class.forName("lsg.consumables.Consumable");
+            Class<?> c1 = Class.forName("lsg.consumables.food.Americain");
+            Class<?> c2 = Class.forName("lsg.consumables.food.Hamburger");
+
+            Constructor<?> constructor1 = c1.getDeclaredConstructor();
+            Constructor<?> constructor2 = c2.getDeclaredConstructor();
+
+            Object o1 = constructor1.newInstance();
+            Object o2 = constructor2.newInstance();
+
+            Method m = c0.getDeclaredMethod("toString");
+
+            Assert.assertEquals("Friterie 2000's Best of the Best [3000 life point(s)]", (String) (m.invoke(o1)));
+            Assert.assertEquals("Uncle Greg's spicy Maroilles burger [40 life point(s)]", (String) (m.invoke(o2)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have a class called Consumable and subclasses in consumables package");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in Consumable class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
 
 }
