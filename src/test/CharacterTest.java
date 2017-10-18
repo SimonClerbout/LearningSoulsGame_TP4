@@ -137,6 +137,8 @@ public class CharacterTest {
             Method m = c2.getDeclaredMethod("drink", c3);
             Method m2 = c2.getDeclaredMethod("getStamina");
 
+            Assert.assertEquals(m.getModifiers(), Modifier.PRIVATE);
+
             m.setAccessible(true);
             m.invoke(o1, o2);
             Assert.assertEquals(outContent.toString(), "Gregooninator drinks 12 years old Oban [150 stamina point(s)]\n");
@@ -167,6 +169,8 @@ public class CharacterTest {
             Object o2 = constructor2.newInstance();
             Method m = c2.getDeclaredMethod("eat", c3);
             Method m2 = c2.getDeclaredMethod("getStamina");
+
+            Assert.assertEquals(m.getModifiers(), Modifier.PRIVATE);
 
             m.setAccessible(true);
             m.invoke(o1, o2);
