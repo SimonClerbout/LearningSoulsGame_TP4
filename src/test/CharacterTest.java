@@ -135,12 +135,45 @@ public class CharacterTest {
             Object o1 = constructor1.newInstance();
             Object o2 = constructor2.newInstance();
             Method m = c2.getDeclaredMethod("drink", c3);
+            Method m2 = c2.getDeclaredMethod("getStamina");
 
             m.setAccessible(true);
             m.invoke(o1, o2);
             Assert.assertEquals(outContent.toString(), "Gregooninator drinks 12 years old Oban [150 stamina point(s)]\n");
+            Assert.assertEquals(m2.invoke(o1), 50);
         } catch (ClassNotFoundException e) {
-            Assert.fail("should have classes called lsg.characters.Hero");
+            Assert.fail("should have classes called lsg.characters.Hero, lsg.characters.Character, lsg.characters.Character and lsg.consumables.drinks.Whisky");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called drink in Character class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
+    @Test
+    public void testCharacterEat() {
+        try {
+            Class<?> c = Class.forName("lsg.characters.Hero");
+            Class<?> c2 = Class.forName("lsg.characters.Character");
+            Class<?> c3 = Class.forName("lsg.consumables.food.Food");
+            Class<?> c4 = Class.forName("lsg.consumables.food.Hamburger");
+            Constructor<?> constructor1 = c.getDeclaredConstructor();
+            Constructor<?> constructor2 = c4.getDeclaredConstructor();
+            Object o1 = constructor1.newInstance();
+            Object o2 = constructor2.newInstance();
+            Method m = c2.getDeclaredMethod("eat", c3);
+            Method m2 = c2.getDeclaredMethod("getStamina");
+
+            m.setAccessible(true);
+            m.invoke(o1, o2);
+            Assert.assertEquals(outContent.toString(), "Gregooninator eats Uncle Greg's spicy Maroilles burger [40 life point(s)]\n");
+            Assert.assertEquals(m2.invoke(o1), 50);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called lsg.characters.Hero, lsg.characters.Character, lsg.consumables.food.Food and lsg.consumables.food.Hamburger");
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called drink in Character class");
         } catch (IllegalAccessException e) {
