@@ -594,7 +594,41 @@ public class ConsumableTest {
             Assert.assertEquals(1, (int) (m1.invoke(o)));
             Assert.assertEquals(capacity - 1, (int) (m2.invoke(o)));
         } catch (ClassNotFoundException e) {
-            Assert.fail("should have classes named RepairKit");
+            Assert.fail("should have classe named RepairKit");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called use in RepairKit class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
+    @Test
+    public void existWeaponRepairWith() {
+        try {
+            Class<?> c1 = Class.forName("lsg.consumables.repair.RepairKit");
+            Constructor<?> constructor1 = c1.getDeclaredConstructor();
+            Object o1 = constructor1.newInstance();
+            Class<?> c2 = Class.forName("lsg.weapons.Weapon");
+            Constructor<?> constructor2 = c2.getDeclaredConstructor(String.class, int.class, int.class, int.class, int.class);
+            Object o2 = constructor2.newInstance("Grosse Arme", 0, 0, 1000, 100);
+            Method m1 = c2.getDeclaredMethod("repairWith", c1);
+            Method m2 = c2.getDeclaredMethod("getDurability");
+            int durability;
+
+            for (int i = 0; i < 10; ++i) {
+                durability = (int) (m2.invoke(o2));
+                m1.invoke(o2, o1);
+                Assert.assertEquals(durability + 1, (int) (m2.invoke(o2)));
+            }
+            durability = (int) (m2.invoke(o2));
+            m1.invoke(o2, o1);
+            Assert.assertEquals(durability, (int) (m2.invoke(o2)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes named RepairKit and Weapon");
         } catch (NoSuchMethodException e) {
             Assert.fail("should have a method called use in RepairKit class");
         } catch (IllegalAccessException e) {
