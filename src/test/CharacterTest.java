@@ -223,4 +223,81 @@ public class CharacterTest {
             Assert.fail("InvocationTargetException");
         }
     }
+
+    @Test
+    public void existWeaponRepairWithInCharacter() {
+        try {
+            Class<?> c1 = Class.forName("lsg.consumables.repair.RepairKit");
+            Constructor<?> constructor1 = c1.getDeclaredConstructor();
+            Object o1 = constructor1.newInstance();
+            Class<?> c2 = Class.forName("lsg.weapons.Weapon");
+            Constructor<?> constructor2 = c2.getDeclaredConstructor(String.class, int.class, int.class, int.class, int.class);
+            Object o2 = constructor2.newInstance("Grosse Arme", 0, 0, 1000, 100);
+            Class<?> c3 = Class.forName("lsg.characters.Hero");
+            Constructor<?> constructor3 = c3.getDeclaredConstructor();
+            Object o3 = constructor3.newInstance();
+            Method m1 = c3.getMethod("setWeapon", c2);
+            Class<?> c4 = Class.forName("lsg.characters.Character");
+            Method m2 = c4.getDeclaredMethod("repairWeaponWith", c1);
+            Method m3 = c4.getDeclaredMethod("attack");
+            Method m4 = c2.getDeclaredMethod("getDurability");
+
+            Assert.assertEquals(m2.getModifiers(), Modifier.PRIVATE);
+
+            m2.setAccessible(true);
+
+            m1.invoke(o3, o2);
+            m3.invoke(o3); // attack
+            m2.invoke(o3, o1);
+            Assert.assertEquals(outContent.toString(), "Gregooninator repairs Grosse Arme (min:0 max:0 stam:1000 dur:99) with Repair Kit [10 durability point(s)]\n");
+            Assert.assertEquals(100, (int)(m4.invoke(o2)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes named RepairKit, Hero and Weapon");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have methods called setWeapon and repairWeaponWith in Character class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
+    @Test
+    public void existWeaponRepairWithInUseMethod() {
+        try {
+            Class<?> c1 = Class.forName("lsg.consumables.repair.RepairKit");
+            Constructor<?> constructor1 = c1.getDeclaredConstructor();
+            Object o1 = constructor1.newInstance();
+            Class<?> c2 = Class.forName("lsg.weapons.Weapon");
+            Constructor<?> constructor2 = c2.getDeclaredConstructor(String.class, int.class, int.class, int.class, int.class);
+            Object o2 = constructor2.newInstance("Grosse Arme", 0, 0, 1000, 100);
+            Class<?> c3 = Class.forName("lsg.characters.Hero");
+            Constructor<?> constructor3 = c3.getDeclaredConstructor();
+            Object o3 = constructor3.newInstance();
+            Method m1 = c3.getMethod("setWeapon", c2);
+            Class<?> c4 = Class.forName("lsg.characters.Character");
+            Class<?> c5 = Class.forName("lsg.consumables.Consumable");
+            Method m2 = c4.getDeclaredMethod("use", c5);
+            Method m3 = c4.getDeclaredMethod("attack");
+            Method m4 = c2.getDeclaredMethod("getDurability");
+
+            m1.invoke(o3, o2);
+            m3.invoke(o3); // attack
+            m2.invoke(o3, o1);
+            Assert.assertEquals(outContent.toString(), "Gregooninator repairs Grosse Arme (min:0 max:0 stam:1000 dur:99) with Repair Kit [10 durability point(s)]\n");
+            Assert.assertEquals(100, (int)(m4.invoke(o2)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes named RepairKit, Hero and Weapon");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have methods called setWeapon and use in Character class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
 }

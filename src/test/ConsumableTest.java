@@ -591,6 +591,8 @@ public class ConsumableTest {
             Method m2 = c.getMethod("getCapacity");
             int capacity = (int) (m2.invoke(o));
 
+            Assert.assertEquals(m1.getModifiers(), Modifier.PUBLIC);
+
             Assert.assertEquals(1, (int) (m1.invoke(o)));
             Assert.assertEquals(capacity - 1, (int) (m2.invoke(o)));
         } catch (ClassNotFoundException e) {
@@ -618,6 +620,8 @@ public class ConsumableTest {
             Method m1 = c2.getDeclaredMethod("repairWith", c1);
             Method m2 = c2.getDeclaredMethod("getDurability");
             int durability;
+
+            Assert.assertEquals(m1.getModifiers(), Modifier.PUBLIC);
 
             for (int i = 0; i < 10; ++i) {
                 durability = (int) (m2.invoke(o2));
