@@ -541,11 +541,15 @@ public class ConsumableTest {
 
             String[] list = outContent.toString().split("\n");
 
-            Assert.assertEquals("1 : Uncle Greg's spicy Maroilles burger [40 life point(s)]", list[1]);
-            Assert.assertEquals("2 : Pomerol 2008 [30 stamina point(s)]", list[2]);
-            Assert.assertEquals("3 : Friterie 2000's Best of the Best [3000 life point(s)]", list[3]);
-            Assert.assertEquals("4 : Hot Grandmother Coffee [10 stamina point(s)]", list[4]);
-            Assert.assertEquals("5 : 12 years old Oban [150 stamina point(s)]", list[5]);
+            if (list.length == 6) {
+                Assert.assertEquals("1 : Uncle Greg's spicy Maroilles burger [40 life point(s)]", list[1]);
+                Assert.assertEquals("2 : Pomerol 2008 [30 stamina point(s)]", list[2]);
+                Assert.assertEquals("3 : Friterie 2000's Best of the Best [3000 life point(s)]", list[3]);
+                Assert.assertEquals("4 : Hot Grandmother Coffee [10 stamina point(s)]", list[4]);
+                Assert.assertEquals("5 : 12 years old Oban [150 stamina point(s)]", list[5]);
+            } else {
+                Assert.assertEquals("6 : Repair Kit [10 durability point(s)]", list[6]);
+            }
         } catch (ClassNotFoundException e) {
             Assert.fail("should have a class called MenuBestOfV4 in consumables package");
         } catch (NoSuchMethodException e) {
