@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91fa4085-dc7f-4436-bd90-1e1b7b1189b5" name="Default" comment="TP2: q7.2">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/CharacterTest.java" afterPath="$PROJECT_DIR$/src/test/CharacterTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/LearningSoulsGameTest.java" afterPath="$PROJECT_DIR$/src/test/LearningSoulsGameTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,14 +18,24 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CharacterTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CharacterTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/CharacterTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
+            <state relative-caret-position="550">
               <caret line="366" column="24" lean-forward="false" selection-start-line="366" selection-start-column="24" selection-end-line="366" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LearningSoulsGame.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lsg/LearningSoulsGame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="69" column="25" lean-forward="true" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -50,9 +60,21 @@
       <file leaf-file-name="ConsumableTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/ConsumableTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="72" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+            <state relative-caret-position="466">
+              <caret line="51" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LearningSoulsGameTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/LearningSoulsGameTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="243" column="65" lean-forward="false" selection-start-line="243" selection-start-column="65" selection-end-line="243" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -96,13 +118,13 @@
         <option value="$PROJECT_DIR$/src/lsg/consumables/MenuBestOfV3.java" />
         <option value="$PROJECT_DIR$/src/lsg/consumables/MenuBestOfV2.java" />
         <option value="$PROJECT_DIR$/src/lsg/characters/Hero.java" />
-        <option value="$PROJECT_DIR$/src/lsg/LearningSoulsGame.java" />
         <option value="$PROJECT_DIR$/src/lsg/weapons/Weapon.java" />
         <option value="$PROJECT_DIR$/src/lsg/consumables/MenuBestOfV4.java" />
         <option value="$PROJECT_DIR$/src/test/ConsumableTest.java" />
-        <option value="$PROJECT_DIR$/src/test/LearningSoulsGameTest.java" />
         <option value="$PROJECT_DIR$/src/lsg/characters/Character.java" />
         <option value="$PROJECT_DIR$/src/test/CharacterTest.java" />
+        <option value="$PROJECT_DIR$/src/lsg/LearningSoulsGame.java" />
+        <option value="$PROJECT_DIR$/src/test/LearningSoulsGameTest.java" />
       </list>
     </option>
   </component>
@@ -831,47 +853,47 @@
       <workItem from="1507810111486" duration="646000" />
       <workItem from="1507820957090" duration="21000" />
       <workItem from="1508307744230" duration="14078000" />
-      <workItem from="1508395813665" duration="4684000" />
+      <workItem from="1508395813665" duration="6342000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="tests - 2017.10.19 at 09h 45m 25s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 40m 43s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="tests - 2017.10.19 at 09h 45m 38s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 40m 55s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="tests - 2017.10.19 at 09h 45m 51s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 41m 06s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="tests - 2017.10.19 at 09h 46m 03s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 41m 21s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="tests - 2017.10.19 at 09h 46m 12s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 41m 37s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="tests - 2017.10.19 at 10h 05m 12s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 41m 51s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="tests - 2017.10.19 at 10h 08m 13s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 42m 05s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="tests - 2017.10.19 at 10h 08m 43s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 42m 15s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="tests - 2017.10.19 at 10h 10m 47s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 42m 29s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="tests - 2017.10.19 at 10h 14m 58s.xml">
+    <history-entry file="tests - 2017.10.19 at 10h 42m 43s.xml">
       <configuration name="tests" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81260000" />
+    <option name="totallyTimeSpent" value="82918000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1366" y="29" width="1920" height="1051" extended-state="6" />
+    <frame x="1366" y="29" width="1920" height="1051" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -884,7 +906,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5021299" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3954984" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973205" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24758843" sideWeight="0.4978701" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1327,14 +1349,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lsg/LearningSoulsGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lsg/consumables/repair/RepairKit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1359,24 +1373,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/LearningSoulsGameTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="156" column="75" lean-forward="false" selection-start-line="156" selection-start-column="75" selection-end-line="156" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/ConsumableTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="72" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lsg/characters/Character.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
@@ -1394,8 +1390,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/CharacterTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
+        <state relative-caret-position="550">
           <caret line="366" column="24" lean-forward="false" selection-start-line="366" selection-start-column="24" selection-end-line="366" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/ConsumableTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="51" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lsg/LearningSoulsGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="69" column="25" lean-forward="true" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/LearningSoulsGameTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="243" column="65" lean-forward="false" selection-start-line="243" selection-start-column="65" selection-end-line="243" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
