@@ -300,4 +300,84 @@ public class CharacterTest {
             Assert.fail("InvocationTargetException");
         }
     }
+
+    @Test
+    public void testConsumableAttribute() {
+        try {
+            Class<?> c1 = Class.forName("lsg.characters.Character");
+            Class<?> c2 = Class.forName("lsg.consumables.Consumable");
+            Field f = c1.getDeclaredField("consumable");
+
+            Assert.assertEquals(f.getModifiers(), Modifier.PRIVATE);
+            Assert.assertEquals(f.getType(), c2);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called Character and Consumable");
+        } catch (NoSuchFieldException e) {
+            Assert.fail("should have an attribute named consumable");
+        }
+    }
+
+    @Test
+    public void testConsumableGetterAndSetter() {
+        try {
+            Class<?> c1 = Class.forName("lsg.characters.Character");
+            Class<?> c2 = Class.forName("lsg.consumables.Consumable");
+            Method m1 = c1.getDeclaredMethod("getConsumable");
+            Method m2 = c1.getDeclaredMethod("setConsumable", c2);
+
+            Assert.assertEquals(m1.getModifiers(), Modifier.PUBLIC);
+            Assert.assertEquals(m2.getModifiers(), Modifier.PUBLIC);
+            Assert.assertTrue("wrong return type (Consumable) of getConsumable", m1.getReturnType() == c2);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called Consumable and Character");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have getter and setter for consumable attribute");
+        }
+    }
+
+    @Test
+    public void existConsumeMethod() {
+        try {
+            Class<?> c1 = Class.forName("lsg.characters.Character");
+            Method m1 = c1.getDeclaredMethod("consume");
+
+            Assert.assertEquals(m1.getModifiers(), Modifier.PUBLIC);
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have class called Character");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method named consume");
+        }
+    }
+
+    @Test
+    public void testConsumeMethod() {
+        try {
+            Class<?> c1 = Class.forName("lsg.characters.Hero");
+            Class<?> c2 = Class.forName("lsg.characters.Character");
+            Class<?> c3 = Class.forName("lsg.consumables.drinks.Whisky");
+            Class<?> c4 = Class.forName("lsg.consumables.Consumable");
+            Constructor<?> constructor1 = c1.getDeclaredConstructor();
+            Constructor<?> constructor2 = c3.getDeclaredConstructor();
+            Object o1 = constructor1.newInstance();
+            Object o2 = constructor2.newInstance();
+            Method m1 = c2.getDeclaredMethod("setConsumable", c4);
+            Method m2 = c2.getDeclaredMethod("consume");
+
+            m1.invoke(o1, o2);
+            m2.invoke(o1);
+
+            Assert.assertEquals(outContent.toString(), "Gregooninator drinks 12 years old Oban [150 stamina point(s)]\n");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes called lsg.characters.Hero, lsg.characters.Character, lsg.consumables.Consumable and lsg.consumables.drinks.Whisky");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have methods called setConsumable and consume in Character class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
 }
