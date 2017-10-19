@@ -556,4 +556,54 @@ public class ConsumableTest {
             Assert.fail("InvocationTargetException");
         }
     }
+
+    @Test
+    public void existRepairKitClass() {
+        try {
+            Class<?> c1 = Class.forName("lsg.consumables.repair.RepairKit");
+            Class<?> c2 = Class.forName("lsg.consumables.Consumable");
+            Constructor<?> constructor = c1.getDeclaredConstructor();
+            Object o = constructor.newInstance();
+            Method m = c2.getDeclaredMethod("toString");
+
+            Assert.assertTrue("Repair should be a subclass of Consumable", c2.isAssignableFrom(c1));
+            Assert.assertEquals("Repair Kit [10 durability point(s)]", (String) (m.invoke(o)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes named Consumable and RepairKit");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called toString in Consumable class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
+    @Test
+    public void existRepairKitUse() {
+        try {
+            Class<?> c = Class.forName("lsg.consumables.repair.RepairKit");
+            Constructor<?> constructor = c.getDeclaredConstructor();
+            Object o = constructor.newInstance();
+            Method m1 = c.getDeclaredMethod("use");
+            Method m2 = c.getMethod("getCapacity");
+            int capacity = (int) (m2.invoke(o));
+
+            Assert.assertEquals(1, (int) (m1.invoke(o)));
+            Assert.assertEquals(capacity - 1, (int) (m2.invoke(o)));
+        } catch (ClassNotFoundException e) {
+            Assert.fail("should have classes named RepairKit");
+        } catch (NoSuchMethodException e) {
+            Assert.fail("should have a method called use in RepairKit class");
+        } catch (IllegalAccessException e) {
+            Assert.fail("IllegalAccessException");
+        } catch (InstantiationException e) {
+            Assert.fail("InstantiationException");
+        } catch (InvocationTargetException e) {
+            Assert.fail("InvocationTargetException");
+        }
+    }
+
 }
